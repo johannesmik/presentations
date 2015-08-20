@@ -4,10 +4,10 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Thesis presentation</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+		<meta name="author" content="Johannes Mikulasch">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -32,234 +32,371 @@
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
+
+		<!-- Style changes, added by johmik -->
+		<style>
+			.reveal .slide-number {
+  				font-size: 16px; }
+
+			.reveal p.nested {
+				text-align: left;
+				margin: 0 0 0 0;
+				position: absolute;
+				top: 0%;
+			}
+
+			.reveal h3.nested {
+				text-align: left;
+			}
+
+			.reveal section img {
+				border: 0;
+				padding: 10px;
+			}
+
+			.reveal div.math-small p.math-small {
+				font-size: 60%;
+			}
+		</style>
 	</head>
 
 	<body>
 
 		<div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
+			<!-- Start -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
+					<p style="text-align: left"><small>Master's thesis presentation</small></p>
+					<h3>Structure and Material Optimization Using a ToF Depth Camera</h3>
+					<p>Johannes Mikulasch</p>
+					<p>Advisor: Christian Kerl</p>
+					<p>August 21, 2015</p>
+					<div style="background-color: #9eceec; width: 120%; height: 40%; position: absolute; top: 120%; left: -10%; z-index: -1;">
+						<p style="text-align: left; position:absolute; top: -50%; left: 10%;">
+							<small>Slides: github.com/johannesmik/thesis-presentation</small>
+						</p>
+						<div style="float: right; margin-right: 10%">
+							<img src="images/vision_group_logo.png">
+							<img src="images/intum_logo.png">
+						</div>
+						<p style="text-align: left; margin-left: 10%">
+							<small><a href="http://vision.in.tum.de/" target="_blank">Computer Vision Group</a></small>
+						</p>
+						<p style="text-align: left; margin-left: 10%">
+							<small>Department of Informatics, Technische Universität München</small>
+						</p>
+					</div>
 				</section>
 
 				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
+					<h2 style="text-align: left">Introduction</h2>
+					<div style="position: absolute">
+						<img src="./images/intro0.png" width="85%">
+					</div>
+					<div style="position: absolute" class="fragment visible current-fragment" data-fragment-index="2">
+						<img src="./images/intro1.png" width="85%">
+					</div>
+					<div style="position: absolute" class="fragment visible current-fragment" data-fragment-index="3">
+						<img src="./images/intro2.png" width="85%">
+					</div>
+					<div style="position: absolute" class="fragment visible current-fragment" data-fragment-index="4">
+						<img src="./images/intro3.png" width="85%">
+					</div>
+					<p style="position: absolute; top: 420%;">Can we improve depth and material information?</p>
 				</section>
 
-				<!-- Example of nested vertical slides -->
+
+				<section>
+					<h2 style="text-align: left">Outline</h2>
+					<h4>Time of Flight cameras</h4>
+					<h4>Dataset creation</h4>
+					<h4>Material estimation</h4>
+					<h4>Optimization</h4>
+					<h4>Outlook, Conclusion</h4>
+					<!--<p>$$\nu_\textrm{cyc} = \frac{e B}{2 \pi m_e c}$$</p>-->
+				</section>
+
+				<!-- Time of flight cameras -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						<h2>Time of Flight cameras</h2>
+						<p>Kinect One</p>
+						<a href="https://www.ifixit.com/Teardown/Xbox+One+Kinect+Teardown/19725" target="_blank">
+							<img src="images/kinect_teardown3.jpg" width="80%">
 						</a>
+						<p>512 $\times$ 424 px depth image (real-time).</p>
+						<p>512 $\times$ 424 px infrared image.</p>
+						<p>1920 $\times$ 1080 px color image.</p>
+						<p style="position: absolute; top:100%;">
+							<small>Image: <a href="https://www.ifixit.com/Teardown/Xbox+One+Kinect+Teardown/19725" target="_blank">
+							ifixit.com teardown
+						</a></small></p>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+						<p class="nested"><small>Time of Flight cameras</small></p>
+						<h3 class="nested">Working principle 1: pulse modulation</h3>
+						<img src="./images/bg_tof_signals0.png" width="50%">
+						<p></p>
+						<p>Round trip time $ t $ of a light burst gives distance $ d =\frac{c \cdot t}{2} $</p>
+						<!--<p>$$ d = \frac{c \cdot t}{2}. $$</p>-->
+						<p>But light is fast, thus precision is challenging</p>
+						<p>$\Delta d = 1~mm \Longrightarrow \Delta t = 6.\bar{6}~
+							ps.$</p>
+						<p>$\ldots$ and no intensity image.</p>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
+						<p class="nested"><small>Time of Flight cameras</small></p>
+						<h3 class="nested">Working principle 2: continuous-wave modulation</h3>
+						<div>
+							<img src="./images/bg_tof_signals1.png" width="35%">
+							<img src="./images/bg_tof_signals2.png" width="35%">
+						</div>
+						<p></p>
+						<p>Measure phase shift $\varphi$ of an intensity modulated, continuous light signal</p>
+						<p>$$ t = \frac{\varphi}{2 f_{mod} \pi} \Longrightarrow d =  \frac{c \varphi}{4 f_{mod} \pi}. $$</p>
+					</section>
+					<section>
+						<p class="nested"><small>Time of Flight cameras</small></p>
+						<h3 class="nested">Infrared images</h3>
+						<div>
+							<img src="./images/hoodie_color.png" width="30%">
+							<img src="./images/hoodie_ir.png" width="30%">
+						</div>
+						<div style="transform: scale(1);">
+									<img src="./images/garment_color.png" width="30%">
+									<img src="./images/garment_ir.png" width="30%">
+						</div>
+						<p>
+							material color image $\nLeftrightarrow$ material infrared image
+						</p>
+					</section>
+					<section>
+						<p class="nested"><small>Time of Flight cameras</small></p>
+						<h3 class="nested">Artifacts on specular objects</h3>
+						<div>
+							<img src="./images/green_ball_artifact.png" width="60%">
+						</div>
+						<div>
+							<img src="./images/aluminium_foil_artifact.png" width="60%">
+						</div>
+					</section>
+					<section>
+						<p class="nested"><small>Time of Flight cameras</small></p>
+						<h3 class="nested">Development</h3>
+
+						<p>precision, cost,</p>
+						<div class="fragment">
+							<P>devices become smaller</P>
+							<div>
+								<img src="./images/tango_inv.jpg" width="40%">
+							</div>
+							<p><small>PMD Tec press release (June 2015):
+								<a href="http://pmdtec.com/news_media/press_release/pmd_enters_tangosmartphones.php" target="_blank">
+									Project Tango
+								</a>
+								</small>
+							</p>
+						</div>
 						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
 					</section>
 				</section>
 
+				<!-- Dataset Creation -->
 				<section>
-					<h2>Slides</h2>
+					<section>
+						<h2>Dataset creation</h2>
+						<p> Synthetic datasets of color, depth, infrared images </p>
+					</section>
+
+					<section>
+						<p class="nested"><small>Dataset creation</small></p>
+						<h3 class="nested">Implementation</h3>
+						<p>OpenGL3 and Python</p>
+						<p>Fragment shaders:<br>diffuse, specular, normal, depth, data</p>
+						<p>Load extern <code>.obj</code> with textures </p>
+						<p>Camera free animatable</p>
+					</section>
+
+					<section>
+						<p class="nested"><small>Dataset creation</small></p>
+						<h3 class="nested">Scenes 1</h3>
+						<div>
+							<img src="images/dataset/SpecularSphere_color.png" width="20%">
+							<img src="images/dataset/SpecularSphere_depth.png" width="20%">
+							<img src="images/dataset/SpecularSphere_ir.png" width="20%">
+						</div>
+						<p>A specular sphere.</p>
+						<div>
+							<img src="images/dataset/MonkeySuzanne_color.png" width="20%">
+							<img src="images/dataset/MonkeySuzanne_depth.png" width="20%">
+							<img src="images/dataset/MonkeySuzanne_ir.png" width="20%">
+						</div>
+
+						<p>Monkey Suzanne (blender): diffuse face, specular eyes.</p>
+
+						<aside class="notes">
+							infrared light, pointlight, coincident Kinect One
+						</aside>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Dataset creation</small></p>
+						<h3 class="nested">Scenes 2</h3>
+						<div>
+							<img src="images/dataset/ThreeSpheres_color.png" width="20%">
+							<img src="images/dataset/ThreeSpheres_depth.png" width="20%">
+							<img src="images/dataset/ThreeSpheres_ir.png" width="20%">
+						</div>
+						<p>Three spheres, one diffuse, two specular.</p>
+						<div>
+							<img src="images/dataset/ThreeBoxes_color.png" width="20%">
+							<img src="images/dataset/ThreeBoxes_depth.png" width="20%">
+							<img src="images/dataset/ThreeBoxes_ir.png" width="20%">
+						</div>
+
+						<p>Three Boxes, same materials as the spheres.</p>
+
+						<aside class="notes">
+							Desired challenge: can you see specular highlights
+						</aside>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Dataset creation</small></p>
+						<h3 class="nested">Advantages</h3>
+						<p>Ground truth known</p>
+						<p>Easy to create new scenes</p>
+						<h3 class="nested">Disadvantage</h3>
+						<p>Noise and artifacts are not realistic</p>
+					</section>
+
+				</section>
+
+				<!-- Material Estimation -->
+				<section>
+					<section>
+						<h2>Material estimation</h2>
+						<p><img src="images/intro_material.png"></p>
+						<p>Cluster color and depth using k-means</p>
+						<p>Relate surface normals to infrared intensity</p>
+						<p>Fit the Phong model through it</p>
+						<p>$\Longrightarrow$ Estimate material properties $k_d$, $k_s$, $n$ for each cluster.</p>
+					</section>
+
+					<section>
+						<p class="nested"><small>Material estimation</small></p>
+						<h3 class="nested">Clustering</h3>
+						<p>k-means to find cluster centers $\vec{\mu}$ of 6-dimensional data $\vec{x}$:</p>
+						<div class="math-small">
+							\begin{align}
+								\vec{x} =
+								(\lambda_p, \lambda_p, \lambda_d, \lambda_c)^T
+								\begin{pmatrix}x \\ y \\ \mathcal{D} \\ \mathcal{C} \end{pmatrix}
+							\end{align}
+						</div>
+						<div>
+							<img src="images/clusterings_singlesphere.png" width="80%">
+						</div>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Material estimation</small></p>
+						<h3 class="nested">Clustering -- how to choose k?</h3>
+						<p>
+							<img src="images/clusterings_singlesphere_inertias.png" width="40%">
+						</p>
+						<p class="math-small">
+							\begin{equation}
+								I_k = \sum_{i}^{k} \sum_{j, c(j) = i} \parallel \vec{x}_j - \mu_i \parallel_2^2.
+							\end{equation}
+
+							\begin{equation}
+								\hat{k} = \underset{k}{\mathrm{argmin~}} k \qquad\text{subject to} \qquad
+							    \frac{I_{k+1}}{I_{k}} > \tau
+							\end{equation}
+						</p>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Material estimation</small></p>
+						<h3 class="nested">Clustering -- how to choose k?</h3>
+						<p>
+
+						</p>
+					</section>
+				</section>
+
+				<!-- Optimization -->
+				<section>
+					<section>
+						<h2>Optimization</h2>
+						<p>
+						</p>
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Clustering</h3>
+					</section>
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Energy function</h3>
+						<div class="math-small">
+							\begin{align*} \hat{\mathcal{D}}, \hat{\mathcal{M}} =
+							\underset{\mathcal{D}, \mathcal{M}}{\mathrm{argmin}} &
+							\overbrace{\sum_{j} \frac{(\mathcal{D}_i - \mathcal{D}_i^O)^2}{2 \sigma_{d}^2}}^{\text{depth data term}}
+							+ \overbrace{\sum_{j} \frac{(\mathcal{I}_i^O - I_{spec}(\mathcal{D}, \mathcal{M}))^2}{2 \sigma_{i}^2}}^{\text{shading constraint term}} \\
+							+& \underbrace{w_d \sum_{i}\sum_{j \in n(i)} \lVert \vec{n}_j - \vec{n}_i \rVert_2^2}_{\text{smooth depth term}}
+							+ \underbrace{w_m \sum_{i}\sum_{j \in n(i)} \lvert \mathcal{M}_j - \mathcal{M}_i \rvert}_{\text{smooth material term}}.
+							\end{align*}
+						</div>
+
 					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
+
 					</p>
+					</section>
+
 				</section>
 
 				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Touch Optimized</h2>
+					<h2>Outlook</h2>
 					<p>
 						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
 					</p>
 				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
 				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+					<h2>Conclusion</h2>
 
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
 					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
+						<ul>
+							<li>Test</li>
+							<li>Test2</li>
+							<li>Test3</li>
+						</ul>
+
+					</p>
+
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p class="fragment visible current-fragment">
+						Thanks for your attention!
+						<img src="http://i.imgur.com/sCozEOz.jpg" style="position: absolute; top: 75%; left:65%; box-shadow: none; z-index: -1" width="20%">
 					</p>
 				</section>
 
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-						<h2>... and GIFs!</h2>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
 
 				<section>
 					<h2>Pretty Code</h2>
 					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
 
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
+c, l = estimate.cluster(color, depth, infrared, lambdas=[.5, .5, .5, .0])
 					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
 				</section>
 
 				<section>
@@ -292,89 +429,6 @@ function linkify( selector ) {
 					</table>
 				</section>
 
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
-
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
-
 			</div>
 
 		</div>
@@ -387,12 +441,20 @@ Reveal.addEventListener( 'customevent', function() {
 			// Full list of configuration options available at:
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				controls: true,
+				controls: false,
 				progress: true,
 				history: true,
 				center: true,
 
+				// Slide numbers
+				slideNumber:true,
+
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
 
 				// Optional reveal.js plugins
 				dependencies: [
@@ -401,7 +463,8 @@ Reveal.addEventListener( 'customevent', function() {
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/math/math.js', async: true }
 				]
 			});
 
