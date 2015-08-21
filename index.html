@@ -54,8 +54,12 @@
 				padding: 10px;
 			}
 
-			.reveal div.math-small p.math-small {
+			.reveal div.math-small, p.math-small {
 				font-size: 60%;
+			}
+
+			.reveal table th, .reveal table td {
+			  border-bottom: 0;
 			}
 		</style>
 	</head>
@@ -219,6 +223,20 @@
 					</section>
 
 					<section>
+						<p class="nested"><small>Material estimation</small></p>
+						<h3 class="nested">Material properties</h3>
+						<p>$k_d$: diffuse reflectivity</p>
+						<p>$k_s$: specular reflectivity</p>
+						<p>$n$: hardness</p>
+						<h3>Phong model</h3>
+						<p>
+							\begin{align}
+							I =&  I_{\text{in}} k_d \cos \theta + I_{\text{in}} k_s \left(\cos \theta'\right)^n
+							\end{align}
+						</p>
+					</section>
+
+					<section>
 						<p class="nested"><small>Dataset creation</small></p>
 						<h3 class="nested">Scenes 1</h3>
 						<div>
@@ -324,10 +342,60 @@
 
 					<section>
 						<p class="nested"><small>Material estimation</small></p>
-						<h3 class="nested">Clustering -- how to choose k?</h3>
-						<p>
+						<h3 class="nested">Extracting</h3>
+						<div>
+							<img src="images/light_angles.png" width="35%">
+							<img src="images/angle_to_intensity_plot0.png" width="40%">
+						</div>
+						<p>Normals calculated from depth image</p>
+						<p>Light direction / viewing direction is known</p>
+						<p>Obtain data pairs $(\Theta_h, \mathcal{I})$ for each pixel in each cluster</p>
+					</section>
 
-						</p>
+					<section>
+						<p class="nested"><small>Material estimation</small></p>
+						<h3 class="nested">Fitting</h3>
+						<p>A constrained optimization fits the Phong model through data</p>
+						<div>
+							<img src="images/angle_to_intensity_plot2.png" width="40%">
+						</div>
+						<p>$\Longrightarrow$ gives $k_d$, $k_s$ and $n$ value for each cluster</p>
+					</section>
+
+					<section>
+						<p class="nested"><small>Material estimation</small></p>
+						<h3 class="nested">Results</h3>
+						<div>
+							<img src="images/results_sphere/figure_1.png" width=20%">
+							<img src="images/results_sphere/figure_14.png" width=20%">
+							<img src="images/results_sphere/figure_3.png" width=20%">
+						</div>
+						<div>
+							<img src="images/results_sphere/figure_8.png" width=20%">
+							<img src="images/results_sphere/figure_9.png" width=20%">
+						</div>
+						<div>
+							<img src="images/results_sphere/figure_10.png" width=20%">
+							<img src="images/results_sphere/figure_11.png" width=20%">
+						</div>
+					</section>
+
+					<section>
+						<p class="nested"><small>Material estimation</small></p>
+						<h3 class="nested">Results 2</h3>
+						<div>
+							<img src="images/results_box/figure_1.png" width=20%">
+							<img src="images/results_box/figure_14.png" width=20%">
+							<img src="images/results_box/figure_3.png" width=20%">
+						</div>
+						<div>
+							<img src="images/results_box/figure_8.png" width=20%">
+							<img src="images/results_box/figure_9.png" width=20%">
+						</div>
+						<div>
+							<img src="images/results_box/figure_10.png" width=20%">
+							<img src="images/results_box/figure_11.png" width=20%">
+						</div>
 					</section>
 				</section>
 
@@ -335,17 +403,35 @@
 				<section>
 					<section>
 						<h2>Optimization</h2>
-						<p>
+						<div>
+							<img src="./images/intro3.png" width="55%">
+						</div>
+						<p>Böhme et al. (2008) proposed this for a diffuse relighting model.</p>
+						<p>Extend this to specular relighting model.</p>
+						<p style="text-align: left">
+							<small>
+								Böhme et al. (2008), <a href="https://scholar.google.de/scholar?cluster=5500796202203268761" target="_blank">
+								Shading constraint improves accuracy of time-of-flight measurements.</a>
+							</small>
 						</p>
 					</section>
 
 					<section>
 						<p class="nested"><small>Optimization</small></p>
-						<h3 class="nested">Clustering</h3>
-					</section>
-					<section>
-						<p class="nested"><small>Optimization</small></p>
 						<h3 class="nested">Energy function</h3>
+						<div class="math-small">
+							\begin{align*}
+							\hat{\mathcal{D}}, \hat{\mathcal{M}} =&
+							\underset{\mathcal{D}, \mathcal{M}}{\mathrm{argmax~}}
+							p(\mathcal{D},  \mathcal{M} | \mathcal{D}^O, \mathcal{I}^O) \\
+
+							=& \underset{\mathcal{D}, \mathcal{M}}{\mathrm{argmax~}}
+							p(\mathcal{D}^O | \mathcal{D}) p(\mathcal{I}^O | \mathcal{D}, \mathcal{M}) p(\mathcal{D}) p(\mathcal{M}).
+							\end{align*}
+						</div>
+
+						<p>boils down to optimizing this energy:</p>
+
 						<div class="math-small">
 							\begin{align*} \hat{\mathcal{D}}, \hat{\mathcal{M}} =
 							\underset{\mathcal{D}, \mathcal{M}}{\mathrm{argmin}} &
@@ -356,17 +442,197 @@
 							\end{align*}
 						</div>
 
-					<p>
+						<p>A non-linear conjugate gradient minimization was used.</p>
+
+						<p>
 
 					</p>
 					</section>
 
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Implementation</h3>
+
+						<p>Python and PyCUDA</p>
+						<p>Performance critical code in CUDA<br>Huge speedup over initial implementation on the CPU/OpenGL</p>
+
+						<p>Energy derivative: central difference</p>
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Results A</h3>
+
+
+						<p>The first experiment</p>
+						<p>compares diffuse and specular optimizations.</p>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Results A -- Diffuse</h3>
+
+						<div>
+							<img src="images/results_opt_sphere_diff/depth_obs.png" width="20%">
+							<img src="images/results_opt_sphere_diff/depth_opt.png" width="20%">
+						</div>
+												<div>
+							<img src="images/results_opt_sphere_diff/ir_obs.png" width="20%">
+							<img src="images/results_opt_sphere_diff/ir_init.png" width="20%">
+							<img src="images/results_opt_sphere_diff/ir_opt.png" width="20%">
+						</div>
+												<div>
+							<img src="images/results_opt_sphere_diff/kd_ground.png" width="20%">
+							<img src="images/results_opt_sphere_diff/kd_init.png" width="20%">
+							<img src="images/results_opt_sphere_diff/kd_opt.png" width="20%">
+						</div>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Results A -- Specular</h3>
+
+						<div>
+							<img src="images/results_opt_sphere_spec/ir_obs.png" width="20%">
+							<img src="images/results_opt_sphere_spec/ir_init.png" width="20%">
+							<img src="images/results_opt_sphere_spec/ir_opt.png" width="20%">
+						</div>
+						<div>
+							<img src="images/results_opt_sphere_spec/kd_ground.png" width="20%">
+							<img src="images/results_opt_sphere_spec/kd_init.png" width="20%">
+							<img src="images/results_opt_sphere_spec/kd_opt.png" width="20%">
+						</div>
+						<div>
+							<img src="images/results_opt_sphere_spec/ks_ground.png" width="20%">
+							<img src="images/results_opt_sphere_spec/ks_init.png" width="20%">
+							<img src="images/results_opt_sphere_spec/ks_opt.png" width="20%">
+						</div>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Results A</h3>
+						<p>Comparing RMSE improvement</p>
+						<p>RMSE (ground, initial) $\leftrightarrow$ RMSE (ground, optimized)</p>
+						<div style="float: left">
+
+
+							<table style="font-size: 75%">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Improvement</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>$\mathcal{D}$</td><td>- 1.6 %</td>
+									</tr>
+									<tr>
+										<td>$I(\mathcal{D}, \mathcal{M})$</td><td>13.8%</td>
+									</tr>
+									<tr>
+										<td>$k_d$</td><td>- 31.4 %</td>
+									</tr>
+								</tbody>
+							</table>
+							</div><div>
+							<table style="font-size: 75%">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Improvement</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td >$\mathcal{D}$</td><td>- 5.08 %</td>
+									</tr>
+									<tr>
+										<td>$I(\mathcal{D}, \mathcal{M})$</td><td>18.1</td>
+									</tr>
+									<tr>
+										<td>$k_d$</td><td>- 44.2 %</td>
+									</tr>
+									<tr>
+										<td>$k_s$</td><td>- 2.1 %</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<p>&nbsp;</p>
+						<p>$\Longrightarrow$ tune free parameters $\sigma_d^2$, $\sigma_i^2$, $w_d$, and $w_m$.</p>
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Results B</h3>
+
+						<p>Evaluate on real data.</p>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Results B</h3>
+
+						<div>
+							<img src="images/results_opt_ball/depth_obs.png" width="25%">
+							<img src="images/results_opt_ball/depth_init.png" width="25%">
+							<img src="images/results_opt_ball/depth_opt.png" width="25%">
+						</div>
+						<div>
+							<img src="images/results_opt_ball/ir_obs.png" width="25%">
+							<img src="images/results_opt_ball/ir_init.png" width="25%">
+							<img src="images/results_opt_ball/ir_opt.png" width="25%">
+						</div>
+
+					</section>
+
+					<section>
+						<p class="nested"><small>Optimization</small></p>
+						<h3 class="nested">Results B</h3>
+
+						<div>
+							<img src="images/results_opt_ball/kd_init.png" width="30%">
+							<img src="images/results_opt_ball/kd_opt.png" width="30%">
+						</div>
+						<div>
+							<img src="images/results_opt_ball/ks_init.png" width="30%">
+							<img src="images/results_opt_ball/ks_opt.png" width="30%">
+						</div>
+
+					</section>
+
 				</section>
 
+                <!-- Outlook -->
 				<section>
-					<h2>Outlook</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+					<h3 style="text-align: left">Outlook</h3>
+<!--					<h4>Dataset creation</h4>
+						<ul>
+							<li>Inlcude more realistic noise & lighting models</li>
+						</ul> -->
+
+					<h4>Segmentation</h4>
+
+						<ul>
+							<li>Use another segmentation method</li>
+                            <li>Include infrared image for segmentation</li>
+							<li>Results probabilities</li>
+						</ul>
+
+                    <h4>Optimization</h4>
+                        <ul>
+                            <li>Investigate in different setups and initializations</li>
+                            <li>Split the smooth material parameter $w_m$ into three different ones</li>
+                            <li>Realistic model for light attenuation</li>
+                            <li>Better examination possibilities for the optimization</li>
+                            <li>Extension to more general lighting models (BRDF)</li>
+                        </ul>
 					</p>
 				</section>
 
@@ -375,9 +641,9 @@
 
 					<p>
 						<ul>
-							<li>Test</li>
-							<li>Test2</li>
-							<li>Test3</li>
+							<li>Proposed and implemented a method to estimate material properties from a single RGB-D-IR image</li>
+							<li>Implemented an optimization method to improve depth and material information</li>
+							<li>More future ivestigation necessary</li>
 						</ul>
 
 					</p>
@@ -390,44 +656,6 @@
 					</p>
 				</section>
 
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-
-c, l = estimate.cluster(color, depth, infrared, lambdas=[.5, .5, .5, .0])
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							</tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							</tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
 
 			</div>
 
