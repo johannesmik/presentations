@@ -1,10 +1,11 @@
-# Master thesis presentation
+# Presentations
 
 Use the arrow keys or the space key for navigation.
 
 'ESC' gives an overview of the slides.
 
-[Click here to start the presentation](http://rawgit.com/johannesmik/thesis-presentation/master/index.html)
+[LSI Bochum: Munich](http://rawgit.com/johannesmik/presentation/master/lsi-munich.html)
+[Master thesis](http://rawgit.com/johannesmik/presentation/master/master-thesis.html)
 
 # reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.svg?branch=master)](https://travis-ci.org/hakimel/reveal.js)
 
