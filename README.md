@@ -4,6 +4,8 @@ Use the arrow keys or the space key for navigation.
 
 'ESC' gives an overview of the slides.
 
+[Niigata Excursion](http://rawgit.com/johannesmik/presentations/master/ngnm-nigata.html)
+
 [LSI Bochum: Munich](http://rawgit.com/johannesmik/presentations/master/lsi-munich.html)
 
 [Master thesis](http://rawgit.com/johannesmik/presentations/master/master-thesis.html)
