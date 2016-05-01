@@ -91,12 +91,13 @@
 			<!-- Start -->
 			<div class="slides">
 				<section data-background-color="#fff">
-                        <h2>ドイツの世界遺産、</h2>
-                        <h2>日本の世界遺産</h2>
-                        <br>
+                        <h3>ドイツの世界遺産、</h3>
+
+                        <h3>日本の世界遺産</h3>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Zollverein_Schacht_12.jpg/330px-Zollverein_Schacht_12.jpg" width="26%">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/ItsukushimaTorii7396.jpg/500px-ItsukushimaTorii7396.jpg" width="30%">
                         <p>2016年03月31日　（木）</p>
 					    <p>ミクラシュ・ヨハネス</p>
-                        <p>johannes_mikulasch@yahoo.co.jp</p>
 
                     <aside class="notes">
                         ノート
@@ -105,66 +106,68 @@
 
                 <section data-background-color="#fff">
 
-                        <h2>世界遺産って何？</h2>
+                        <h3>世界遺産って何？</h3>
                         
                         <ul>
-                            <li>点</li>
-                            <li>点</li>
+                            <li>1970年代に始めたリスト</li>
+                            <li>ユネスコによって採択される</li>
+                            <li>文化遺産(797)、自然遺産(197)、複合遺産(31)</li>
+                            <li>目的は自然や文化を守ること</li>
                         </ul>
                     <aside class="notes">
                     </aside>
                 </section>
 　               <section data-background-color="#fff">
 
-                        <h2>古代の世界遺産</h2>
+                        <p>ドイツと日本の例</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Regensburg_08_2006_2.jpg/300px-Regensburg_08_2006_2.jpg" width="30%">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Juister_Strand2.jpg/195px-Juister_Strand2.jpg" width="30%">
+
+                        <div style="display: inline-block; position: relative; width=30%">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Speicherstadt_abends.jpg/195px-Speicherstadt_abends.jpg" width="100%">
+
+                            <div style="position: absolute; bottom:12px; left:12px; width=100%; background-color=black; color: white;">
+                            <small>(2015)</small>
+                            </div>
+
+                        </div>
+                         <hr>
+                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Genbaku_Dome04-r.JPG/240px-Genbaku_Dome04-r.JPG" width="30%">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Lake_Motosu04.jpg/240px-Lake_Motosu04.jpg" width="30%">
+                        <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Battle-Ship_Island_Nagasaki_Japan.jpg/240px-Battle-Ship_Island_Nagasaki_Japan.jpg" width="30%"> -->
+
+                        <div style="display: inline-block; position: relative; width=30%">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Battle-Ship_Island_Nagasaki_Japan.jpg/240px-Battle-Ship_Island_Nagasaki_Japan.jpg" width="100%"> 
+
+                            <div style="position: absolute; bottom:12px; left:12px; width=100%; background-color=black; color: white;">
+                            <small>(2015)</small>
+                            </div>
+
+                        </div>
                         
-                        <ul>
-                            <li>点</li>
-                            <li>点</li>
-                        </ul>
                     <aside class="notes">
                     </aside>
                 </section>
 　               <section data-background-color="#fff">
-
-                        <h2>近代の世界遺産</h2>
-                        
-                        <ul>
-                            <li>点</li>
-                            <li>点</li>
-                        </ul>
+                    <h3>世界遺産の数</h3>
+                    <div id="plot1" width="50%"></div>
+                    <p>ドイツ:　1978年　(1.05件/年)　<br>日本：　1993年　(.82件/年)
                     <aside class="notes">
                     </aside>
                 </section>
 
-　               <section data-background-color="#fff">
-
-                        <h2>自然の世界遺産</h2>
-                        
-                        <ul>
-                            <li>点</li>
-                            <li>点</li>
-                        </ul>
+                <!-- 
+　              　<section data-background-color="#fff">
+                    <h2>世界遺産の数</h2>
+                    <div id="plot2" width="50%"></div>
                     <aside class="notes">
                     </aside>
-                </section>
-
-　               <section data-background-color="#fff">
-
-                        <h2>２０１５年に登録された世界遺産</h2>
-                        
-                        <ul>
-                            <li>点</li>
-                            <li>点</li>
-                        </ul>
-                    <aside class="notes">
-                    </aside>
-                </section>
+                </section> -->
 
 
                 <section>
-					<h2>まとめ</h2>
-                    <p></p>
+					<h2>以上です</h2>
+                    <h3>ご清聴ありがとうございます</h3>
 				</section>
 
 			</div>
@@ -209,6 +212,112 @@
 			});
 
 		</script>
+
+
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js"></script>
+        <script type="text/javascript" src=js/uvcharts.min.js></script>
+
+        <script>
+
+            var graphdef1 = {
+                categories : ['文化', '自然'],
+                dataset : {
+                    '文化' : [
+                        { name : 'ドイツ', value : 37 },
+                        { name : '日本', value : 15 },
+                    ],
+                    '自然' : [
+                        { name : 'ドイツ', value : 3 },
+                        { name : '日本', value : 4 },
+                    ],
+                }
+            };
+
+            var chart1 = uv.chart('Bar', graphdef1 , {
+                meta : {
+                    position : '#plot1',
+                    vlabel : '件数',
+                },
+                graph : {
+                    orientation : 'Vertical',
+                },
+                dimension : {
+                    width : 400,
+                    height: 180
+                },
+                axis : {　fontsize : 30　},
+                label : {　fontsize : 30　},
+                caption : {　fontsize : 30　},
+                subCaption : {　fontsize : 30　},
+                bar : {　fontsize : 30　},
+                legend : {　fontsize : 30　},
+            });
+
+
+            var graphdef2 = {
+                categories : ['nihon', 'doitsu'],
+                dataset : {
+                    'nihon' : [
+                        { name : 1993, value : 4 },
+                        { name : 1994, value : 1 },
+                        { name : 1995, value : 1 },
+                        { name : 1996, value : 2 },
+                        { name : 1998, value : 1 },
+                        { name : 1999, value : 1 },
+                        { name : 2000, value : 1 },
+                        { name : 2004, value : 1 },
+                        { name : 2005, value : 1 },
+                        { name : 2007, value : 1 },
+                        { name : 2011, value : 2 },
+                        { name : 2013, value : 1 },
+                        { name : 2014, value : 1 },
+                        { name : 2015, value : 1 },
+                    ],
+                    'doitsu' : [
+                        { name : 1993, value : 1 },
+                        { name : 1994, value : 2 },
+                        { name : 1995, value : 1 },
+                        { name : 1996, value : 3 },
+                        { name : 1998, value : 1 },
+                        { name : 1999, value : 2 },
+                        { name : 2000, value : 2 },
+                        { name : 2001, value : 1 },
+                        { name : 2002, value : 2 },
+                        { name : 2004, value : 2 },
+                        { name : 2006, value : 1 },
+                        { name : 2007, value : 1 },
+                        { name : 2008, value : 1 },
+                        { name : 2009, value : 1 },
+                        { name : 2011, value : 2 },
+                        { name : 2012, value : 1 },
+                        { name : 2013, value : 1 },
+                        { name : 2014, value : 1 },
+                        { name : 2015, value : 1 },
+                    ],
+                }
+            };
+
+            var chart2 = uv.chart('Line', graphdef2 , {
+                meta : {
+                    position : '#plot2',
+                    vlabel : '件数',
+                },
+                graph : {
+                    orientation : 'Vertical',
+                },
+                dimension : {
+                    width : 400,
+                    height: 250
+                },
+                axis : {　fontsize : 30　},
+                label : {　fontsize : 30, precision : 2000　},
+                caption : {　fontsize : 30　},
+                subCaption : {　fontsize : 30　},
+                bar : {　fontsize : 30　},
+                legend : {　fontsize : 30　},
+            });
+
+        </script>
 
 	</body>
 </html>
