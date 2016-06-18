@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>新潟の見学　ー　北村製作所</title>
+
+		<meta name="description" content="Presentation about the Nigata field trip in 2015">
+		<meta name="author" content="Johannes Mikulasch">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!-- Style changes, added by johmik -->
+		<style>
+			.reveal .slide-number {
+  				font-size: 16px; }
+
+			.reveal p.nested {
+				text-align: left;
+				margin: 0 0 0 0;
+				position: absolute;
+				top: 0%;
+			}
+
+			.reveal h3.nested {
+				text-align: left;
+			}
+
+			.reveal section img {
+				border: 0;
+				padding: 10px;
+                box-shadow: none;
+			}
+
+
+			.reveal div.math-small, p.math-small {
+				font-size: 60%;
+			}
+
+			.reveal table th, .reveal table td {
+			  border-bottom: 0;
+			}
+
+			.slides section.has-dark-background,
+			.slides section.has-dark-background h1,
+            .slides section.has-dark-background h2,
+            .slides section.has-dark-background h3 {
+				color: #fff;
+			}
+			.slides section.has-light-background,
+			.slides section.has-light-background h1,
+            .slides section.has-light-background h2 {
+				color: #222;
+			}
+
+            .reveal {
+                font-family: 'TakaoPGothic', 'ＭＳ Ｐゴシック', 'MS PGothic', 'メイリオ', Meiryo, sans-serif;
+            }
+
+            .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+                font-family: 'TakaoPGothic', 'ＭＳ Ｐゴシック', 'MS PGothic', 'メイリオ', Meiryo, sans-serif;
+            }
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Start -->
+			<div class="slides">
+				<section data-background-color="#fff" data-background="./images/tomonokai-go/robot_against_others_bg.jpg">
+                        <h2>レッツ　ゴー</h2>
+                        <!-- <p>AlphaGo vs 李世ドルの囲碁五番勝負について</p> -->                        
+                        <h4><b>AlphaGo vs 李世ドルの勝負について</b></h4>
+                        <h4>人工知能は人間を越える？</h4>
+                        <br>
+                        <br>
+                        <p>DAAD Tomonokai, 2016年03月19日</p>
+					    <small>ミクラシュ・ヨハネス, johannes_mikulasch@yahoo.co.jp</small>
+
+                    <aside class="notes">
+                        ノート
+                    </aside>
+				</section>
+
+　               <section data-background-color="#fff">
+                        <h3>囲碁五番勝負</h3>
+                        <p>2016年3月9日ー15日の勝負</p>
+                        <ol>
+                            <li>Alpha Go</li>
+                            <li>Alpha Go</li>
+                            <li>Alpha Go</li>
+                            <li>李世ドル</li>
+                            <li>Alpha Go</li>
+                        </ol>
+                        <p>試合結果: <span class="fragment highlight-blue">4-1</span></p>
+                        
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section>
+                    <h3 class="fragment grow">AlphaGoの勝った方法は？</h3>
+                </section>
+    
+　               <section data-background-color="#fff">
+                        <h3>ゲームの樹形図</h3>
+
+                        <p>○×ゲームのゲームの樹形図の例</p>
+                            <img src="./images/tomonokai-go/game_tree.png" width="50%" style="margin:0">
+
+                        
+                        <p><b>人工知能はこの樹形図でいい道を探す</b></p>
+   
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section>
+                        <h3>しかし, この樹形図は大き過ぎる:</h3>
+                        <p align="left">囲碁:</p>
+                        <ul>
+                            <li>一つの節点には◯通りの可能性: <span style="color:blue;">$\bar{w}=250$</span></li>
+                            <li>始まりから終わりまでの◯個の節点: <span style="color:blue;">$\bar{d}=150$</span></li>
+                        </ul>
+
+                        <p>(チェス:　$\bar{w}=35$, $\bar{d}=80$)</p>
+                        <p><small><a href="https://dx.doi.org/10.1038/nature16961" target="_blank">[Silver+ 2016]</a></small></p>
+
+                        <blockquote>
+                            そんな大きな樹形図の計算には<br>「モンテカルロ木探索」が使われる
+                        </blockquote>
+
+                </section>
+
+　               <section data-background-color="#fff">
+
+                        <h2>AlphaGoの基幹</h2>
+
+                        <p>
+                            AlphaGoはニューラルネットワークが二つあり、脳みそのような計算ができる。</p>
+                        <p>
+                        それで、モンテカルロ木探索でいい結果に必要な道を減らすことができる。</p>
+
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section>
+                    <h3>第1ニューラルネットワーク</h3>
+                    <p>ゲームの状態から、次にコマが置かれる確率が高い場所を計算する。</p>
+                    <img src="./images/tomonokai-go/policy_network.png" width="55%" style="margin:0;">
+
+                    <p>このネットワークはオープンソースの囲碁のソフト「Pachi」に８５％の確率で勝つことができる。とても強い方法です。</p>
+                </section>
+
+                <section>
+                    <h3>第2ニューラルネットワーク</h3>
+                    <p>ゲームの状態から、今どちらが勝っているか負けているかを計算する。</p>
+                    <img src="./images/tomonokai-go/value_network.png" width="55%" style="margin:0;">
+                    <p>そうすることによって、樹形図を最後まで計算する必要がなくなる。</p>
+                </section>
+
+                <section>
+
+                        <p>この人工の脳みそは、本物の脳みそのようにニューロンというユニットから作られている。</p>
+
+                        <img src="./images/tomonokai-go/network.png" style="margin:0" width="30%">
+
+                        <p>ニューロンごとに重さ（数字の大きさ）があり、計算に影響する。</p>
+
+                        <p>この重さはネットワークのトレーニングの段階で定義される。</p>
+
+                </section>
+
+                <section data-background-color="#fff">
+
+                        <h2>トレーニングの段階</h2>
+
+                            <div style="float:left;width:45%;margin:10px">
+                                <img src="./images/tomonokai-go/robot_observing.jpg">
+                            </div>
+                            <div style="float:left;width:45%;margin:10px">
+                                <img src="./images/tomonokai-go/robot_against_robot.jpg">
+                            </div>
+                        <ol>
+                            <li>3千万回ゲームを観察して、覚える <a href="https://www.gokgs.com/" target="_blank">(KGS database)</a></li>
+                            <li>何回も自分と戦う</li>
+                        </ol>
+
+                        <p></p>
+                        
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+　               <section>
+
+                        <h2>特徴</h2>
+                        <p>AlphaGoはゲームを”学ぶ”、そして経験をつんで強くなる、<span  class="fragment grow"><b>だからプロに勝てる。</b></span></p>
+
+                        <p>コメンテーターはAlphaGoは人間みたいに遊んでいると言った。<p>
+
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+
+                <section data-background-color="#fff" data-background="./images/tomonokai-go/robot_observing_bg.jpg">
+					<h2>まとめ</h2>
+                    <p>強いAIが囲碁のプロに勝った。</p>
+                    <p>人工知能は囲碁で人間を越えたと思う。</p>
+                    <p></p>
+                    <p>ニューラルネットワークは<a href="http://papers.nips.cc/paper/4824-imagenet-classification-w" target="_blank">画像認識</a>とか<a href="https://dx.doi.org/10.1038/nature14236" target="_blank">ビデオゲームのAI</a>にも使われている。</p>
+				</section>
+
+                <section data-background-color="#fff" data-background="./images/tomonokai-go/robot_against_robot_bg.jpg">
+                    <h2>References & Links</h2>
+
+                    <ul>
+                    <li>Mastering the game of Go with deep neural networks and tree search <a href="https://dx.doi.org/10.1038/nature16961" target="_blank">[Silver+ 2016]</a></li>
+                    </ul>
+                </section>
+
+                <section data-background-color="#fff" data-background="./images/tomonokai-go/robot_against_others_bg.jpg">
+                    <h2>References & Links 2</h2>
+
+                    <iframe width="853" height="480" src="https://www.youtube.com/embed/g-dKXOlsf98" frameborder="0" allowfullscreen></iframe>
+                </section>
+　               <section data-background-color="#fff" data-background="./images/tomonokai-go/robot_against_others_bg.jpg">
+
+                        <h2>語彙</h2>
+                        
+                        <ul>
+                            <li>ゲームの木 Game tree</li>
+                            <li>木探索 Tree Search</li>
+                            <li>モンテカルロ木探索　Monte Carlo Tree Search   </li>
+                        </ul>
+
+<p>AlphaGoは48のCPU（コンピュータ）、8のGPU（グラフィック）を使っている。　もっとすごいバージョンもある(1202 CPU、176 GPU)。</p>
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+                width: 800,
+                height: 600,
+
+				// Slide numbers
+				slideNumber:true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				math: {
+        			mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+        			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+    			},
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/math/math.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
